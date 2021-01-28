@@ -61,10 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 String resultConcat = resultVal+"\n"+resultVal2+"\n"+resultVal3;
                 //Notificaion
                 mainActivityViewModel.notification(MainActivity.this,resultConcat);
-
             }
         });
     }
-
-
 }

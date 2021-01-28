@@ -28,8 +28,7 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 public class MainActivityViewModel extends ViewModel {
 
-    public void SharedPref(Context context,String result1,String result2,String result3)
-    {
+    public void SharedPref(Context context, String result1, String result2, String result3) {
         SharedPreferences sp;
         sp = context.getSharedPreferences("result", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -40,35 +39,31 @@ public class MainActivityViewModel extends ViewModel {
 
     }
 
-    public String Addition(String val1, String val2)
-    {
+    public String Addition(String val1, String val2) {
         int value1 = Integer.parseInt(val1);
         int value2 = Integer.parseInt(val2);
-        int result = value1+value2;
+        int result = value1 + value2;
 
         return String.valueOf(result);
     }
 
-    public String Subtraction(String val1, String val2)
-    {
+    public String Subtraction(String val1, String val2) {
         int value1 = Integer.parseInt(val1);
         int value2 = Integer.parseInt(val2);
-        int result = value1-value2;
+        int result = value1 - value2;
 
         return String.valueOf(result);
     }
 
-    public String Multy(String val1, String val2)
-    {
+    public String Multy(String val1, String val2) {
         int value1 = Integer.parseInt(val1);
         int value2 = Integer.parseInt(val2);
-        int result = value1*value2;
+        int result = value1 * value2;
 
         return String.valueOf(result);
     }
 
-    public void notification(Context context,String result)
-    {
+    public void notification(Context context, String result) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
         String NOTIFIATION_CHANNEL_ID = "id_1"; //remove com. from package name and add .test at end
