@@ -49,23 +49,13 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
 
-        if (activityMainBinding.val1et.getText().equals(null) || activityMainBinding.val2et.getText().equals(null)) {
-            Log.d("NullCheck", "Null ");
-        } else if (activityMainBinding.val1et.getText() != null || activityMainBinding.val2et.getText() != null) {
-            Log.d("NullCheck", "Not Null ");
-        }
-
-
         activityMainBinding.btnaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(TextUtils.isEmpty(activityMainBinding.val1et.getText()) || TextUtils.isEmpty(activityMainBinding.val2et.getText()))
-                {
+                if (TextUtils.isEmpty(activityMainBinding.val1et.getText()) || TextUtils.isEmpty(activityMainBinding.val2et.getText())) {
                     Toast.makeText(MainActivity.this, "No Input", Toast.LENGTH_SHORT).show();
-                }
-
-                else {
+                } else {
 
                     String resultVal = mainActivityViewModel.Addition(MainActivity.this, activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
                     String resultVal2 = mainActivityViewModel.Subtraction(MainActivity.this, activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
