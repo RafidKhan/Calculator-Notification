@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.ViewModel;
@@ -36,10 +37,9 @@ public class MainActivityViewModel extends ViewModel {
         editor.putString("result2", result2);
         editor.putString("result3", result3);
         editor.commit();
-
     }
 
-    public String Addition(String val1, String val2) {
+    public String Addition(Context context, String val1, String val2) {
         int value1 = Integer.parseInt(val1);
         int value2 = Integer.parseInt(val2);
         int result = value1 + value2;
@@ -47,7 +47,7 @@ public class MainActivityViewModel extends ViewModel {
         return String.valueOf(result);
     }
 
-    public String Subtraction(String val1, String val2) {
+    public String Subtraction(Context context, String val1, String val2) {
         int value1 = Integer.parseInt(val1);
         int value2 = Integer.parseInt(val2);
         int result = value1 - value2;
@@ -55,7 +55,7 @@ public class MainActivityViewModel extends ViewModel {
         return String.valueOf(result);
     }
 
-    public String Multy(String val1, String val2) {
+    public String Multy(Context context, String val1, String val2) {
         int value1 = Integer.parseInt(val1);
         int value2 = Integer.parseInt(val2);
         int result = value1 * value2;
@@ -66,7 +66,7 @@ public class MainActivityViewModel extends ViewModel {
     public void notification(Context context, String result) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
-        String NOTIFIATION_CHANNEL_ID = "id_1"; //remove com. from package name and add .test at end
+        String NOTIFIATION_CHANNEL_ID = "id_1";
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFIATION_CHANNEL_ID, "Notification", NotificationManager.IMPORTANCE_DEFAULT);
@@ -84,14 +84,13 @@ public class MainActivityViewModel extends ViewModel {
         notificationBuilder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.ic_cal)
                 .setLargeIcon(bitmapAndroidLogo)
                 .setContentTitle("Your Results")
                 .setContentText(result)
                 .setContentInfo("Info");
 
         notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
-
     }
 
 }

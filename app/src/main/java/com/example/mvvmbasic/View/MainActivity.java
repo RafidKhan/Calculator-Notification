@@ -16,6 +16,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -35,33 +38,50 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding activityMainBinding;
     MainActivityViewModel mainActivityViewModel;
 
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        activityMainBinding =  ActivityMainBinding.inflate(getLayoutInflater());
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view1 = activityMainBinding.getRoot();
         setContentView(view1);
 
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
+
+        if (activityMainBinding.val1et.getText().equals(null) || activityMainBinding.val2et.getText().equals(null)) {
+            Log.d("NullCheck", "Null ");
+        } else if (activityMainBinding.val1et.getText() != null || activityMainBinding.val2et.getText() != null) {
+            Log.d("NullCheck", "Not Null ");
+        }
+
+
         activityMainBinding.btnaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String resultVal = mainActivityViewModel.Addition(activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
-                String resultVal2 = mainActivityViewModel.Subtraction(activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
-                String resultVal3 = mainActivityViewModel.Multy(activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
+                if(TextUtils.isEmpty(activityMainBinding.val1et.getText()) || TextUtils.isEmpty(activityMainBinding.val2et.getText()))
+                {
+                    Toast.makeText(MainActivity.this, "No Input", Toast.LENGTH_SHORT).show();
+                }
 
-                mainActivityViewModel.SharedPref(MainActivity.this,resultVal,resultVal2,resultVal3);
+                else {
 
-                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                startActivity(intent);
+                    String resultVal = mainActivityViewModel.Addition(MainActivity.this, activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
+                    String resultVal2 = mainActivityViewModel.Subtraction(MainActivity.this, activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
+                    String resultVal3 = mainActivityViewModel.Multy(MainActivity.this, activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
 
-                String resultConcat = resultVal+"\n"+resultVal2+"\n"+resultVal3;
-                //Notificaion
-                mainActivityViewModel.notification(MainActivity.this,resultConcat);
+                    mainActivityViewModel.SharedPref(MainActivity.this, resultVal, resultVal2, resultVal3);
+
+                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                    startActivity(intent);
+
+                    String resultConcat = resultVal + "\n" + resultVal2 + "\n" + resultVal3;
+                    //Notificaion
+                    mainActivityViewModel.notification(MainActivity.this, resultConcat);
+                }
             }
+
         });
     }
 }

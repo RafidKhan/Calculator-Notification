@@ -19,13 +19,14 @@ public class ResultActivity extends AppCompatActivity {
 
     ResultActivityViewModel resultActivity;
     ActivityResultBinding activityResultBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         resultActivity = new ViewModelProvider(this).get(ResultActivityViewModel.class);
 
-        activityResultBinding =  ActivityResultBinding.inflate(getLayoutInflater());
+        activityResultBinding = ActivityResultBinding.inflate(getLayoutInflater());
         View view2 = activityResultBinding.getRoot();
         setContentView(view2);
 
@@ -33,9 +34,9 @@ public class ResultActivity extends AppCompatActivity {
         String fetchResult2 = resultActivity.SharedPref2(ResultActivity.this, activityResultBinding.result2.getText().toString());
         String fetchResult3 = resultActivity.SharedPref3(ResultActivity.this, activityResultBinding.result3.getText().toString());
 
-        activityResultBinding.result1.setText("Addition: "+fetchResult);
-        activityResultBinding.result2.setText("Subtraction: "+fetchResult2);
-        activityResultBinding.result3.setText("Multiplication: "+fetchResult3);
+        activityResultBinding.result1.setText("Addition: " + fetchResult);
+        activityResultBinding.result2.setText("Subtraction: " + fetchResult2);
+        activityResultBinding.result3.setText("Multiplication: " + fetchResult3);
 
         activityResultBinding.result1.setTextSize(30);
         activityResultBinding.result2.setTextSize(30);
