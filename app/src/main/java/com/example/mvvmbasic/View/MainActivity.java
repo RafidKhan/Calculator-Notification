@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view1);
 
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-
+        
 
         activityMainBinding.btnaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(activityMainBinding.val1et.getText()) || TextUtils.isEmpty(activityMainBinding.val2et.getText())) {
-                    Toast.makeText(MainActivity.this, "No Input", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
                 } else {
 
                     String resultVal = mainActivityViewModel.Addition(MainActivity.this, activityMainBinding.val1et.getText().toString(), activityMainBinding.val2et.getText().toString());
